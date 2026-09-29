@@ -70,6 +70,7 @@ export default function FarmerLayout() {
     {
       category: 'Operations & Livestock',
       items: [
+        { to: '/farmer/market-intelligence', label: 'Market Intelligence (APMC)', icon: <FaChartLine /> },
         { to: '/farmer/equipment', label: 'Equipment Rental', icon: <FaTractor /> },
         { to: '/farmer/veterinary', label: 'Veterinary & Livestock', icon: <FaHeartbeat /> },
         { to: '/farmer/marketplace', label: 'Agricultural Market', icon: <FaStore /> },

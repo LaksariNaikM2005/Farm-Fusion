@@ -30,6 +30,7 @@ import SustainabilityScore from './pages/farmer/SustainabilityScore';
 import EquipmentRental from './pages/farmer/EquipmentRental';
 import VeterinaryCare from './pages/farmer/VeterinaryCare';
 import TripartiteCases from './pages/farmer/TripartiteCases';
+import MarketIntelligence from './pages/farmer/MarketIntelligence';
 
 // Expert pages
 import ExpertHome from './pages/expert/ExpertHome';
@@ -99,6 +100,7 @@ export default function App() {
           <Route path="analytics" element={<FarmAnalytics />} />
           <Route path="sustainability" element={<SustainabilityScore />} />
           <Route path="equipment" element={<EquipmentRental />} />
+          <Route path="market-intelligence" element={<MarketIntelligence />} />
           <Route path="veterinary" element={<VeterinaryCare />} />
           <Route path="cases" element={<TripartiteCases />} />
           
