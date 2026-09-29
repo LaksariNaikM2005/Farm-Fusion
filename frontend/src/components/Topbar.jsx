@@ -23,6 +23,7 @@ export default function Topbar({ toggleSidebar, sidebarOpen }) {
         <Link to="/" className="topbar-brand">
           <FaLeaf className="brand-icon" />
           <span>Farm <span className="brand-accent">Fusion</span></span>
+          <span className="brand-version">2.0</span>
         </Link>
       </div>
       <div className="topbar-right">
