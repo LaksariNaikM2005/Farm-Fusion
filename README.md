@@ -1,246 +1,122 @@
-# 🌾 Farm Fusion
+# 🌾 Farm Fusion 2.0: AI-Powered Personalized Agricultural Decision-Support Ecosystem
 
-> **Empowering the Future of Agriculture** — A full-stack digital ecosystem connecting farmers, agricultural experts, and government resources through AI, e-commerce, and real-time communication.
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-brightgreen.svg)](https://nodejs.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.111.0-teal.svg)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-19-blue.svg)](https://react.dev/)
+[![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-yellow.svg)](https://github.com/ultralytics/ultralytics)
 
-[![React](https://img.shields.io/badge/Frontend-React%2018%20%2B%20Vite-61DAFB?logo=react)](https://reactjs.org/)
-[![Node.js](https://img.shields.io/badge/Backend-Node.js%20%2B%20Express-339933?logo=node.js)](https://nodejs.org/)
-[![FastAPI](https://img.shields.io/badge/AI%20Service-FastAPI%20%2B%20YOLOv8-009688?logo=fastapi)](https://fastapi.tiangolo.com/)
-[![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248?logo=mongodb)](https://www.mongodb.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
----
-
-## 📖 Overview
-
-**Farm Fusion** is a premium, all-in-one platform built for the modern agricultural ecosystem. It bridges the gap between farmers, certified experts, and government bodies by combining:
-
-- 🤖 **AI-Powered Crop Disease Detection** using YOLOv8 (YOLO computer vision model)
-- 🛒 **A Dynamic Marketplace** for seeds, fertilizers, tools, and organic products
-- 💬 **Real-time Expert Consultations** with integrated Socket.IO chat
-- 📋 **Government Scheme Listings** for subsidies, loans, and support programs
-- 🌐 **Community Forum** for knowledge sharing across the farming community
+> **Farm Fusion 2.0** is an AI-powered personalized agricultural decision-support ecosystem connecting farmers, students, certified experts, verified knowledge bases, markets, schemes, and intelligent farm lifecycle management.
 
 ---
 
-## ✨ Key Features
+## 🌟 Central Transformation: 1.0 vs 2.0
 
-### 👨‍🌾 For Farmers
-| Feature | Description |
-|:---|:---|
-| **AI Crop Diagnosis** | Upload a photo to instantly detect crop diseases via YOLOv8 |
-| **Marketplace** | Browse & purchase agricultural products with Stripe payments |
-| **Expert Bookings** | Schedule and manage appointments with certified agronomists |
-| **Live Chat** | Real-time messaging with experts powered by Socket.IO |
-| **Govt. Schemes** | Explore the latest subsidies, loans, and government programs |
-| **Weather & News** | Live weather updates and agricultural news via OpenWeatherMap & News API |
-
-### 👨‍🔬 For Experts
-| Feature | Description |
-|:---|:---|
-| **Appointment Management** | View, accept, and track consultation requests |
-| **Consultation History** | Full record of past interactions with farmers |
-| **Real-time Chat** | Communicate directly with farmers via integrated messaging |
-
-### 🛡️ For Administrators
-| Feature | Description |
-|:---|:---|
-| **Platform Dashboard** | Monitor all user activity and platform health |
-| **User Management** | Manage farmer and expert accounts |
-| **Inventory Control** | Add, update, and remove marketplace products |
-| **Scheme Management** | Publish and update government scheme listings |
+| Capability | Farm Fusion 1.0 | Farm Fusion 2.0 Ecosystem |
+|---|---|---|
+| **Farmer Identity** | Basic name & location string | **AI Farmer Profile & Soil Passport** (NPK, pH, water, livestock, machinery) |
+| **Advisory & Chat** | Generic chatbot | **Grounded RAG Copilot** citing ICAR, KVK & Agri University manuals |
+| **Plant Disease** | Standalone YOLO classification | **Dual-Stage Diagnostic Engine** (Vision + Organic/Chemical Control + Expert Escalation) |
+| **Government Schemes** | Flat catalog list | **Personalized Eligibility Matcher** (% match score, land/state/crop checklist) |
+| **Crop Planning** | None | **ML Crop Recommendation Engine** + **Interactive Profit/Margin Calculator** |
+| **Lifecycle** | None | **8-Stage Farm Lifecycle Engine** (Plan → Prepare → Plant → Grow → Monitor → Harvest → Sell → Analyze) |
+| **Accounting & ROI** | None | **Farm Expense Tracker** + **Visual Recharts ROI & Cost/Acre Analytics** |
+| **Sustainability** | None | **Eco-Index Score (0-100)** across water, soil, biological diversity & input management |
+| **Operations** | Products e-commerce only | **Equipment Rental Hub** (Tractors, Drones, Harvesters with Operators) |
+| **Livestock** | None | **Veterinary Module** (Animal registry, vaccination scheduler, safety symptom triage) |
+| **Education** | None | **Tripartite Ecosystem & Student Mode** (ICAR Courses, JRF/SRF MCQ Arena, Case Studies) |
+| **Accessibility** | English only | **Multilingual Regional UI & Voice Engine** (English, ಕನ್ನಡ, हिंदी) |
 
 ---
 
-## 🛠️ Technology Stack
-
-| Layer | Technology |
-|:---|:---|
-| **Frontend** | React 18, Vite, Redux Toolkit, React Router v6, Vanilla CSS |
-| **Backend** | Node.js, Express.js, MongoDB (Mongoose), JWT Auth, Socket.IO |
-| **AI Service** | Python 3.10+, FastAPI, YOLOv8 (Ultralytics), PyTorch |
-| **Payments** | Stripe |
-| **Media Storage** | Cloudinary |
-| **Weather / News** | OpenWeatherMap API, News API |
-| **Infrastructure** | Docker, Docker Compose |
-
----
-
-## 📁 Project Structure
+## 🏗️ Architecture
 
 ```
-FARM FUSION/
-├── frontend/              # React + Vite SPA
-│   ├── src/
-│   │   ├── api/           # Axios API clients
-│   │   ├── components/    # Reusable UI components
-│   │   ├── pages/         # Route-level page components
-│   │   ├── store/         # Redux Toolkit slices & store
-│   │   └── App.jsx        # Root app with routing
-│   └── package.json
-│
-├── backend/               # Express.js REST API + Socket.IO
-│   ├── config/            # DB connection & config
-│   ├── controllers/       # Route handler logic
-│   ├── middlewares/       # Auth, error handling
-│   ├── models/            # Mongoose schemas
-│   ├── routes/            # API route definitions
-│   ├── utils/             # Helper utilities
-│   └── server.js          # Entry point
-│
-├── ai-service/            # FastAPI Python microservice
-│   ├── models/            # YOLOv8 .pt model files
-│   ├── main.py            # FastAPI app & prediction endpoint
-│   └── requirements.txt
-│
-├── docker-compose.yml     # Full-stack container orchestration
-├── run_project.bat        # Windows one-click startup script
-└── requirements.txt       # Root Python dependencies
+                                FARM FUSION 2.0
+                                       |
+                +----------------------+----------------------+
+                |                      |                      |
+             FARMERS                STUDENTS               EXPERTS
+                |                      |                      |
+                +----------------------+----------------------+
+                                       |
+                                APPLICATION API
+                          Node.js + Express + MongoDB
+                                       |
+                +----------------------+----------------------+
+                |                                             |
+          AI/ML SERVICE                                  RAG SERVICE
+         FastAPI / Python                           Knowledge Repository
+                |                                             |
+      YOLOv8 + ML Decision Tree                    ICAR / KVK / IVRI Docs
+                |                                             |
+                +----------------------+----------------------+
+                                       |
+                               FARM INTELLIGENCE
+                                       |
+             +-------------------------+-------------------------+
+             |                         |                         |
+          Crop ML                  Disease AI                Market AI
+             |                         |                         |
+             +-------------------------+-------------------------+
+                                       |
+                               AI FARMER COPILOT
+                                       |
+                               EXPERT VALIDATION
 ```
 
 ---
 
-## ⚙️ Local Setup
+## 🚀 Quick Start
 
-### Prerequisites
-
-Ensure the following are installed on your machine:
-
-- [Node.js](https://nodejs.org/) v18+
-- [Python](https://www.python.org/) v3.10+
-- [MongoDB](https://www.mongodb.com/) (local instance or Atlas URI)
-
----
-
-### Step 1 — Clone & Install Dependencies
-
+### 1. Backend Server (Node.js & MongoDB)
 ```bash
-# Clone the repository
-git clone <your-repo-url>
-cd "FARM FUSION"
-
-# Install backend dependencies
-npm install --prefix backend
-
-# Install frontend dependencies
-npm install --prefix frontend
-
-# Create & activate Python virtual environment (from project root)
-python -m venv .venv
-.\.venv\Scripts\activate
-
-# Install AI service Python dependencies
-pip install -r ai-service/requirements.txt
+cd backend
+npm install
+npm run dev
 ```
+* Runs on `http://localhost:5000` (automatically attaches MongoDB In-Memory Server if local Mongo instance is not running).
 
----
-
-### Step 2 — Configure Environment Variables
-
-Create `.env` files in the `backend/` directory using `.env.example` as a template.
-
+### 2. AI Intelligence Microservice (Python & FastAPI)
 ```bash
-copy backend\.env.example backend\.env
+cd ai-service
+# Activate virtual environment
+..\.venv\Scripts\activate
+uvicorn main:app --reload --port 8000
 ```
+* Runs on `http://localhost:8000` (YOLOv8 disease classifier & crop decision trees).
 
-**Key backend variables to set:**
-
-| Variable | Description |
-|:---|:---|
-| `MONGO_URI` | MongoDB connection string (local or Atlas) |
-| `JWT_SECRET` | Secret key for JWT token signing |
-| `STRIPE_SECRET_KEY` | Stripe secret key for payment processing |
-| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name for image uploads |
-| `CLOUDINARY_API_KEY` | Cloudinary API key |
-| `CLOUDINARY_API_SECRET` | Cloudinary API secret |
-| `OPENWEATHER_API_KEY` | OpenWeatherMap API key |
-| `NEWS_API_KEY` | News API key |
-
----
-
-### Step 3 — Run the Application
-
-You need **3 separate terminals** to run all services simultaneously.
-
-#### 🖥️ Terminal 1 — Backend API (Port 5000)
-
+### 3. Frontend Web Application (React & Vite)
 ```bash
-npm run dev --prefix backend
-# API running at: http://localhost:5000
+cd frontend
+npm install
+npm run dev
 ```
-
-#### 🤖 Terminal 2 — AI Microservice (Port 8000)
-
-```bash
-# Activate the virtual environment first
-.\.venv\Scripts\activate
-
-# Run from the project ROOT directory
-python ai-service/main.py
-# AI Service running at: http://localhost:8000
-```
-
-> ⚠️ **Important:** Always run the AI service from the **project root**, not from inside `ai-service/`. Running `uvicorn app.main:app` from inside `backend/` will fail with `ModuleNotFoundError`.
-
-#### 🌐 Terminal 3 — Frontend (Port 5173)
-
-```bash
-npm run dev --prefix frontend
-# App running at: http://localhost:5173
-```
-
-#### ⚡ One-Click Start (Windows)
-
-Alternatively, use the provided batch script to start all services at once:
-
-```bash
-run_project.bat
-```
+* Runs on `http://localhost:5173`.
 
 ---
 
-## 🧪 Demo Credentials
+## 📱 Default User Credentials for Demonstration
 
-Use these credentials to explore the platform without registration:
-
-| Role | Email | Password |
-|:---|:---|:---|
-| 👨‍🌾 **Farmer** | farmer@demo.com | `password123` |
-| 👨‍🔬 **Expert** | expert@demo.com | `password123` |
-| 🛡️ **Admin** | admin@demo.com | `password123` |
-
----
-
-## 🐳 Docker Setup (Optional)
-
-To run the entire stack with Docker:
-
-```bash
-docker-compose up --build
-```
-
-This will spin up the frontend, backend, and AI service as isolated containers.
+| Role | Email | Password | Primary Feature Access |
+|---|---|---|---|
+| **Farmer** | `farmer@demo.com` | `password123` | Farm Lifecycle, Copilot, Crop AI, Disease Scan, Schemes, Expenses |
+| **Student** | `student@demo.com` | `password123` | ICAR Courseware, MCQ Quiz Arena, Case Study Diagnostic Proposals |
+| **Expert** | `expert@demo.com` | `password123` | Scientific Validation, Farmer Case Certification, Video Consultations |
+| **Admin** | `admin@demo.com` | `password123` | Analytics, User Moderation, Product & Scheme Approvals |
 
 ---
 
-## 🛡️ Troubleshooting
+## 📖 Comprehensive Documentation
 
-| Issue | Solution |
-|:---|:---|
-| `ModuleNotFoundError: No module named 'app'` | Run `python ai-service/main.py` from the **project root**, not from `backend/` |
-| `EADDRINUSE :::5000` | Another process is using port 5000. Run `netstat -ano \| findstr :5000` and kill it |
-| Port conflicts (5000, 5173, 8000) | Ensure all three ports are free before starting services |
-| AI model not loading | Confirm `.pt` model files exist inside `ai-service/models/` |
-| MongoDB connection error | Verify your `MONGO_URI` in `backend/.env` is correct and DB is running |
-| Cloudinary upload failing | Double-check `CLOUDINARY_CLOUD_NAME`, `API_KEY`, and `API_SECRET` in `.env` |
+* [Architecture & System Flow](docs/ARCHITECTURE.md)
+* [REST API Reference](docs/API.md)
+* [AI & Computer Vision Architecture](docs/AI_ARCHITECTURE.md)
+* [5-10 Min Master Demonstration Walkthrough](docs/DEMO_GUIDE.md)
 
 ---
 
-## 📜 License
-
-Distributed under the **MIT License**. See [`LICENSE`](./LICENSE) for more information.
-
----
-
-<div align="center">
-  Developed with ❤️ by the <strong>Farm Fusion Team</strong>
-</div>
+## ⚖️ Safety & Accuracy Disclaimer
+* **Agricultural Recommendations**: Model estimates based on ICAR agronomy standards. Actual outcomes vary by micro-climate and field conditions.
+* **Veterinary Safety**: AI animal symptom triage is for preliminary first-aid guidance only and never replaces a certified veterinary doctor.
+* **Disease Detection**: YOLOv8 results are potential detections; confirm with plant pathology experts before applying systemic chemical controls.

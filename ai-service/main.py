@@ -1,12 +1,15 @@
 import os
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from ultralytics import YOLO
-import io
-from PIL import Image
-import numpy as np
+from routers.disease import router as disease_router
+from routers.crop import router as crop_router
+from services.disease_service import run_disease_inference
 
-app = FastAPI(title="Farm Fusion AI Service")
+app = FastAPI(
+    title="Farm Fusion 2.0 AI Intelligence Microservice",
+    description="Computer Vision Disease Detection, ML Crop Suitability & Agronomy RAG APIs",
+    version="2.0.0"
+)
 
 # CORS
 app.add_middleware(
@@ -17,42 +20,27 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load Models
-models_path = os.path.join(os.path.dirname(__file__), "models")
-cls_model = YOLO(os.path.join(models_path, "farmfusion_v1.pt"))
+# Mount Modular Routers
+app.include_router(disease_router)
+app.include_router(crop_router)
 
 @app.get("/")
 async def root():
-    return {"message": "Farm Fusion AI Service is running"}
+    return {
+        "service": "Farm Fusion 2.0 AI Intelligence Microservice",
+        "status": "Online",
+        "models": ["YOLOv8-PlantClassifier", "Agronomy-Decision-Tree", "RAG-Grounding-Engine"]
+    }
 
+# Legacy Compatibility Endpoint
 @app.post("/predict/disease")
-async def predict_disease(file: UploadFile = File(...)):
+async def predict_disease_legacy(file: UploadFile = File(...)):
     if not file.content_type.startswith("image/"):
         raise HTTPException(status_code=400, detail="File must be an image")
     
     try:
         contents = await file.read()
-        image = Image.open(io.BytesIO(contents))
-        
-        # Run inference
-        results = cls_model(image)
-        
-        # Get top prediction
-        result = results[0]
-        probs = result.probs
-        top1_idx = probs.top1
-        top1_conf = float(probs.top1conf)
-        top1_label = result.names[top1_idx]
-        
-        return {
-            "success": True,
-            "label": top1_label,
-            "confidence": top1_conf,
-            "predictions": [
-                {"label": result.names[idx], "confidence": float(conf)}
-                for idx, conf in zip(probs.top5, probs.top5conf)
-            ]
-        }
+        return run_disease_inference(contents)
     except Exception as e:
         return {"success": False, "error": str(e)}
 

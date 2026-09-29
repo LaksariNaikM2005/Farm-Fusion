@@ -26,7 +26,7 @@ export default function Register() {
       const { data } = await api.post('/auth/register', { ...formData, role });
       dispatch(setCredentials({ user: data.user, token: data.token }));
       toast.success('Registration successful!');
-      navigate(role === 'expert' ? '/expert' : '/farmer');
+      navigate(role === 'expert' ? '/expert' : role === 'student' ? '/student' : '/farmer');
     } catch (error) {
       toast.error(error.response?.data?.message || 'Registration failed');
     } finally {
@@ -47,6 +47,7 @@ export default function Register() {
 
         <div className="role-selector mb-6">
           <button className={`role-btn ${role === 'farmer' ? 'active' : ''}`} onClick={() => setRole('farmer')}>Farmer</button>
+          <button className={`role-btn ${role === 'student' ? 'active' : ''}`} onClick={() => setRole('student')}>Student</button>
           <button className={`role-btn ${role === 'expert' ? 'active' : ''}`} onClick={() => setRole('expert')}>Expert</button>
         </div>
 

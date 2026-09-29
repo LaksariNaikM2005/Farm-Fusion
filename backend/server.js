@@ -24,6 +24,22 @@ const externalRoutes = require('./routes/external');
 const adminRoutes = require('./routes/admin');
 const reviewRoutes = require('./routes/reviews');
 
+// Farm Fusion 2.0 Routes
+const farmerProfileRoutes = require('./routes/farmerProfile');
+const farmRoutes = require('./routes/farms');
+const lifecycleRoutes = require('./routes/lifecycle');
+const expenseRoutes = require('./routes/expenses');
+const analyticsRoutes = require('./routes/analytics');
+const cropRoutes = require('./routes/crops');
+const sustainabilityRoutes = require('./routes/sustainability');
+const equipmentRoutes = require('./routes/equipment');
+const veterinaryRoutes = require('./routes/veterinary');
+const studentRoutes = require('./routes/student');
+const caseRoutes = require('./routes/cases');
+const knowledgeRoutes = require('./routes/knowledge');
+const aiRoutes = require('./routes/ai');
+const diseaseRoutes = require('./routes/disease');
+
 const app = express();
 const server = http.createServer(app);
 
@@ -32,7 +48,7 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5174',
   'http://127.0.0.1:5173',
-  'http://127.0.0.1:5174'
+  'http://127.0.0.1:5174',
 ];
 
 // Socket.IO setup
@@ -47,13 +63,15 @@ appointmentController.setIO(io);
 
 // Middleware
 app.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false }));
-app.use(cors({ 
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) callback(null, true);
-    else callback(new Error('Not allowed by CORS'));
-  }, 
-  credentials: true 
-}));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) callback(null, true);
+      else callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true,
+  })
+);
 app.use(morgan('dev'));
 app.use(generalLimiter);
 
@@ -65,9 +83,16 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/uploads', express.static('uploads'));
 
 // Health check
-app.get('/api/v1/health', (req, res) => res.json({ success: true, message: '🌾 Farm Fusion API is running!', timestamp: new Date().toISOString() }));
+app.get('/api/v1/health', (req, res) =>
+  res.json({
+    success: true,
+    platform: 'Farm Fusion 2.0 Ecosystem API',
+    message: '🌾 Farm Fusion 2.0 API is running smoothly!',
+    timestamp: new Date().toISOString(),
+  })
+);
 
-// API Routes
+// API Routes (Legacy + 2.0 Extension)
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/orders', orderRoutes);
@@ -79,6 +104,22 @@ app.use('/api/v1/external', externalRoutes);
 app.use('/api/v1/admin', adminRoutes);
 app.use('/api/v1/reviews', reviewRoutes);
 
+// Farm Fusion 2.0 Intelligence Endpoints
+app.use('/api/v1/farmer-profile', farmerProfileRoutes);
+app.use('/api/v1/farms', farmRoutes);
+app.use('/api/v1/lifecycle', lifecycleRoutes);
+app.use('/api/v1/expenses', expenseRoutes);
+app.use('/api/v1/analytics', analyticsRoutes);
+app.use('/api/v1/crops', cropRoutes);
+app.use('/api/v1/sustainability', sustainabilityRoutes);
+app.use('/api/v1/equipment', equipmentRoutes);
+app.use('/api/v1/veterinary', veterinaryRoutes);
+app.use('/api/v1/student', studentRoutes);
+app.use('/api/v1/cases', caseRoutes);
+app.use('/api/v1/knowledge', knowledgeRoutes);
+app.use('/api/v1/ai', aiRoutes);
+app.use('/api/v1/disease', diseaseRoutes);
+
 // 404 handler
 app.use('*', (req, res) => res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` }));
 
@@ -87,11 +128,9 @@ app.use(errorHandler);
 
 const startServer = async () => {
   try {
-    // Connect DB
     await connectDB();
-
     const PORT = process.env.PORT || 5000;
-    server.listen(PORT, () => console.log(`🚀 Farm Fusion Server running on port ${PORT} in ${process.env.NODE_ENV} mode`));
+    server.listen(PORT, () => console.log(`🚀 Farm Fusion 2.0 Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`));
   } catch (error) {
     console.error('Failed to start server:', error);
     process.exit(1);
